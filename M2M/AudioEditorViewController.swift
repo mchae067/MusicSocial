@@ -16,14 +16,18 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
 
     var firstAudioFileData: NSData!
     var secondAudioFileData: NSData!
+    var editProductFileData: NSData!
+
     var firstAudioFile: PFFile!
     var secondAudioFile : PFFile!
+    var editProductFile: PFFile!
     
     var fromLibrary = false
     var fromRecorder = false
     var fromLibraryFileName1 = ""
     var fromLibraryFileName2 = ""
     var fromRecorderFileName = ""
+    var editProductFileName = ""
     
     var soundFileURL: NSURL!
     
@@ -31,13 +35,21 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
     @IBOutlet var Play2: UIButton!
     
+    @IBOutlet var Play3: UIButton!
+    
     @IBOutlet var Id: UILabel!
     
     @IBOutlet var Id2: UILabel!
     
+    @IBOutlet var Id3: UILabel!
+
     @IBOutlet var Edit: UIButton!
     
     @IBOutlet var Discard: UIButton!
+    
+    @IBOutlet var Discard2: UIButton!
+
+    @IBOutlet var Discard3: UIButton!
    
     @IBOutlet var LibraryBtn: UIButton!
     
@@ -51,12 +63,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) {(action) in}
         alert.addAction(cancel)
         let append = UIAlertAction(title: "Append", style: .Default) {(action) in
-            //open table menu...
-            //item1=file at index
-            //open table menu again without item1
-            //item2=file at index
-            //call append()
-            //add new item to table
+            //self.append(self.firstAudioFile, audio2: self.secondAudioFile)
         }
         alert.addAction(append)
         let overlay = UIAlertAction(title: "Overlay", style: .Default) {(action) in
@@ -94,6 +101,17 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
+    @IBAction func Play3(sender: UIButton) {
+        if player != nil && player.playing {
+            player.stop()
+        }
+        else if editProductFileData != nil {
+            self.playAudio(editProductFileData!)
+        }
+        else {
+        }
+    }
+    
     func playAudio(data: NSData) {
         do {
             self.player = try AVAudioPlayer(data: data)
@@ -114,6 +132,21 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         fromLibrary = false
         fromRecorder = false
         Id2.text = "No File"
+    }
+    @IBAction func Discard2(sender: UIButton) {
+        secondAudioFileData = nil
+        secondAudioFile = nil
+        fromLibrary = false
+        fromRecorder = false
+        Id2.text = "No File"
+    }
+    
+    @IBAction func Discard3(sender: UIButton) {
+        editProductFileData = nil
+        editProductFile = nil
+        fromLibrary = false
+        fromRecorder = false
+        Id3.text = "No File"
     }
     
     func loadFilesFromLibrary(fileName1: String, fileName2: String) {
@@ -186,7 +219,30 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    /*
+    /*func loadFirstAudioFile(fileName: String) {
+        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
+        query.whereKey("audioName", equalTo: fileName)
+        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                self.firstAudioFile = object!["audioFile"] as? PFFile
+                self.firstAudioFile.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.firstAudioFileData = data
+                        self.Id.text = fileName
+                        self.fromLibrary = false
+                        self.fromRecorder = false
+                    }
+                    else {
+                        print(error)
+                    }
+                })
+            }
+            else {
+                print(error)
+            }
+        }
+    }
+    
     func loadSecondAudioFile(fileName1: String, fileName2: String) {
         let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
         query.whereKey("audioName", equalTo: fileName1)
@@ -307,37 +363,41 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    /*func append(audio1: NSData, audio2:  NSData) {
+    /*func append(audio1: PFFile, audio2: PFFile) {
+        let file1 = audio1
+        let string1 = file1.url
+        let file2 = audio2
+        let string2 = file2.url
         
         let composition = AVMutableComposition()
-        var track1:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio,
-            preferredTrackID: CMPersistentTrackID())
-        var track2:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: CMPersistentTrackID())
+        let track1:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: CMPersistentTrackID())
+        let track2:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: CMPersistentTrackID())
         
-        var documentDirectoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! 
-        var fileDestinationUrl = documentDirectoryURL.URLByAppendingPathComponent(" ")
+        let documentDirectoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        let fileDestinationUrl = documentDirectoryURL.URLByAppendingPathComponent(" ")
         print(fileDestinationUrl)
         
         
-        var url1 = audio1
-        var url2 = audio2
+        let url1 = NSURL(fileURLWithPath: string1!)
+        let url2 = NSURL(fileURLWithPath: string2!)
         
         
-        var avAsset1 = AVURLAsset(URL: url1, options: nil)
-        var avAsset2 = AVURLAsset(URL: url2, options: nil)
+        let avAsset1 = AVURLAsset(URL: url1, options: nil)
+        let avAsset2 = AVURLAsset(URL: url2, options: nil)
         
-        var tracks1 =  avAsset1.tracksWithMediaType(AVMediaTypeAudio)
-        var tracks2 =  avAsset2.tracksWithMediaType(AVMediaTypeAudio)
+        let tracks1 =  avAsset1.tracksWithMediaType(AVMediaTypeAudio)
+        let tracks2 =  avAsset2.tracksWithMediaType(AVMediaTypeAudio)
         
-        var assetTrack1:AVAssetTrack = tracks1[0]
-        var assetTrack2:AVAssetTrack = tracks2[0]
+        //error here calling element 0 in empty array
+        let assetTrack1:AVAssetTrack = tracks1[0]
+        let assetTrack2:AVAssetTrack = tracks2[0]
         
         
-        var duration1: CMTime = assetTrack1.timeRange.duration
-        var duration2: CMTime = assetTrack2.timeRange.duration
+        let duration1: CMTime = assetTrack1.timeRange.duration
+        let duration2: CMTime = assetTrack2.timeRange.duration
         
-        var timeRange1 = CMTimeRangeMake(kCMTimeZero, duration1)
-        var timeRange2 = CMTimeRangeMake(duration1, duration2)
+        let timeRange1 = CMTimeRangeMake(kCMTimeZero, duration1)
+        let timeRange2 = CMTimeRangeMake(duration1, duration2)
         
         do {
             try track1.insertTimeRange(timeRange1, ofTrack: assetTrack1, atTime: kCMTimeZero)
@@ -346,7 +406,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         catch _ {
         }
         
-        var assetExport = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A)
+        let assetExport = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A)
         assetExport!.outputFileType = AVFileTypeAppleM4A
         assetExport!.outputURL = fileDestinationUrl
         assetExport!.exportAsynchronouslyWithCompletionHandler({
@@ -356,10 +416,21 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             case AVAssetExportSessionStatus.Cancelled:
                 print("Cancelled \(assetExport!.error)")
             default:
-               print("Success")
-            //Add new file to library, unfinished
+                print("Success")
             }
+            let format = NSDateFormatter()
+            format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+            self.Id3.text = "Append-\(format.stringFromDate(NSDate())).m4a"
+            self.editProductFileData = fileDestinationUrl.dataRepresentation
         })
+        
+        /*let final = NSMutableData()
+        final.appendData(audio1)
+        final.appendData(audio2)
+        let format = NSDateFormatter()
+        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+        Id3.text = "Append-\(format.stringFromDate(NSDate())).m4a"
+        editProductFileData = final*/
     }
     
     func overlay(audio1: NSData, audio2:  NSData) {

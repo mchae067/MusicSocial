@@ -172,6 +172,25 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         play(indexPath.row)
     }
     
+    //slide to delete
+    /*func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            print((PFUser.currentUser()?.username)!)
+            var temp : String = ""
+            if currentCategory == 0 {
+                temp = data0[indexPath.row]
+            } else {
+                temp = data1[indexPath.row]
+            }
+        }
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        if currentCategory == 0 {
+            data0.removeAtIndex(indexPath.row)
+        } else {
+            data1.removeAtIndex(indexPath.row)
+        }
+    }*/
+    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let control = UISegmentedControl(items: ["Received Recordings","Your Recordings"])
         control.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
