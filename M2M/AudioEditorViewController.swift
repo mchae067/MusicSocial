@@ -127,11 +127,11 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
     //Allow the user to discard the current file and pick another one from the library
     @IBAction func Discard(sender: UIButton) {
-        secondAudioFileData = nil
-        secondAudioFile = nil
+        firstAudioFileData = nil
+        firstAudioFile = nil
         fromLibrary = false
         fromRecorder = false
-        Id2.text = "No File"
+        Id.text = "No File"
     }
     @IBAction func Discard2(sender: UIButton) {
         secondAudioFileData = nil
@@ -216,6 +216,30 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
                 }
             }
 
+        }
+    }
+    
+    func loadLibraryImports() {
+        print(fromLibraryFileName1)     // name for first file
+        print(fromLibraryFileName2)     // name for second file
+        
+        if fromLibrary {
+            if self.firstAudioFileData == nil && self.secondAudioFileData == nil {
+                loadFilesFromLibrary(fromLibraryFileName1, fileName2: fromLibraryFileName2)
+            }
+            else if self.secondAudioFileData == nil  {
+                loadFilesFromLibrary(fromLibraryFileName1, fileName2: "")
+            }
+            else {
+                let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace one?", preferredStyle: .Alert)
+                let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
+                alert.addAction(no)
+                let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
+                    self.loadFilesFromLibrary(self.fromLibraryFileName1, fileName2: self.fromLibraryFileName2)
+                }
+                alert.addAction(yes)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
     }
     
@@ -337,30 +361,6 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
         
         // Do any additional setup after loading the view.
-    }
-    
-    func loadLibraryImports() {
-        print(fromLibraryFileName1)     // name for first file
-        print(fromLibraryFileName2)     // name for second file
-        
-        if fromLibrary {
-            if self.firstAudioFileData == nil && self.secondAudioFileData == nil {
-                loadFilesFromLibrary(fromLibraryFileName1, fileName2: fromLibraryFileName2)
-            }
-            else if self.secondAudioFileData == nil  {
-                loadFilesFromLibrary(fromLibraryFileName1, fileName2: "")
-            }
-            else {
-                let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace one?", preferredStyle: .Alert)
-                let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
-                alert.addAction(no)
-                let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
-                    self.loadFilesFromLibrary(self.fromLibraryFileName1, fileName2: self.fromLibraryFileName2)
-                }
-                alert.addAction(yes)
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-        }
     }
     
     /*func append(audio1: PFFile, audio2: PFFile) {

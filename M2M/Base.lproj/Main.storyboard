@@ -220,14 +220,6 @@
                                     <action selector="Play2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="unw-9e-Uak"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Own-HE-ihr">
-                                <rect key="frame" x="295" y="517" width="53" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Discard"/>
-                                <connections>
-                                    <action selector="Discard:" destination="YU8-xd-QMT" eventType="touchUpInside" id="pJi-Sv-Kem"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idM-K4-jtK">
                                 <rect key="frame" x="67" y="140" width="48" height="30"/>
                                 <animations/>
@@ -261,6 +253,41 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUA-6W-R1Y">
+                                <rect key="frame" x="58" y="249" width="150" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE6-Ex-sxr">
+                                <rect key="frame" x="291" y="517" width="61" height="30"/>
+                                <state key="normal" title="Discard2"/>
+                                <connections>
+                                    <action selector="Discard2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="oKs-2c-L98"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2PY-fg-Yq6">
+                                <rect key="frame" x="46" y="278" width="38" height="30"/>
+                                <state key="normal" title="Play3"/>
+                                <connections>
+                                    <action selector="Play3:" destination="YU8-xd-QMT" eventType="touchUpInside" id="tto-yc-MyK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEW-3d-Q0A">
+                                <rect key="frame" x="116" y="278" width="62" height="30"/>
+                                <state key="normal" title="Discard3"/>
+                                <connections>
+                                    <action selector="Discard3:" destination="YU8-xd-QMT" eventType="touchUpInside" id="d12-su-G2r"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Own-HE-ihr">
+                                <rect key="frame" x="97" y="517" width="53" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Discard"/>
+                                <connections>
+                                    <action selector="Discard:" destination="YU8-xd-QMT" eventType="touchUpInside" id="pJi-Sv-Kem"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -275,12 +302,16 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="Discard" destination="Own-HE-ihr" id="ScN-EI-wCo"/>
+                        <outlet property="Discard2" destination="hE6-Ex-sxr" id="kx9-bv-HuO"/>
+                        <outlet property="Discard3" destination="jEW-3d-Q0A" id="tlP-hr-ZLV"/>
                         <outlet property="Edit" destination="m66-Ev-GKF" id="8S1-5T-Evs"/>
                         <outlet property="Id" destination="Opq-0D-ASd" id="E1B-nN-qu3"/>
                         <outlet property="Id2" destination="5KP-cf-bpp" id="Qpu-fw-isA"/>
+                        <outlet property="Id3" destination="hUA-6W-R1Y" id="SEN-r3-j9c"/>
                         <outlet property="LibraryBtn" destination="idM-K4-jtK" id="TuX-Je-7eF"/>
                         <outlet property="Play" destination="ifT-n9-f8e" id="jFj-hu-L4c"/>
                         <outlet property="Play2" destination="FGX-pv-gNC" id="OU3-rU-nUZ"/>
+                        <outlet property="Play3" destination="2PY-fg-Yq6" id="TFm-KP-e66"/>
                         <segue destination="g9b-Kb-WYR" kind="show" identifier="editorToRecorderSegue" id="vW1-93-87K"/>
                     </connections>
                 </viewController>
@@ -890,10 +921,10 @@
         <image name="tabfriend" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="RUP-rU-oJu"/>
         <segue reference="sfj-oe-ExW"/>
         <segue reference="x2c-hS-vsK"/>
         <segue reference="vW1-93-87K"/>
-        <segue reference="RUP-rU-oJu"/>
         <segue reference="MVt-AA-BEh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
