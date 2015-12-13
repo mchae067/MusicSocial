@@ -149,7 +149,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         Id3.text = "No File"
     }
     
-    func loadFilesFromLibrary(fileName1: String, fileName2: String) {
+    /*func loadFilesFromLibrary(fileName1: String, fileName2: String) {
         if fileName2 == "" {
             let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
             query.whereKey("audioName", equalTo: fileName1)
@@ -241,9 +241,9 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
                 self.presentViewController(alert, animated: true, completion: nil)
             }
         }
-    }
+    }*/
     
-    /*func loadFirstAudioFile(fileName: String) {
+    func loadFirstAudioFile(fileName: String) {
         let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
         query.whereKey("audioName", equalTo: fileName)
         query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
@@ -267,16 +267,16 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    func loadSecondAudioFile(fileName1: String, fileName2: String) {
+    func loadSecondAudioFile(fileName: String) {
         let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
-        query.whereKey("audioName", equalTo: fileName1)
+        query.whereKey("audioName", equalTo: fileName)
         query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
                 self.secondAudioFile = object!["audioFile"] as? PFFile
                 self.secondAudioFile.getDataInBackgroundWithBlock({ (data, error) -> Void in
                     if error == nil {
                         self.secondAudioFileData = data
-                        self.Id2.text = fileName1
+                        self.Id2.text = fileName
                         self.fromLibrary = false
                         self.fromRecorder = false
                     }
@@ -290,38 +290,86 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             }
         }
     }
-    */
+    
   
     override func viewWillAppear(animated: Bool) {
-        /*
+        
         print(fromLibraryFileName1)     // name for first file
         print(fromLibraryFileName2)     // name for second file
         
         if fromLibrary {
-            if self.firstAudioFileData == nil && self.secondAudioFileData == nil {
-                loadFilesFromLibrary(fromLibraryFileName1, fileName2: fromLibraryFileName2)
+            if !(fromLibraryFileName2 ?? "").isEmpty {
+                if self.firstAudioFileData == nil && self.secondAudioFileData == nil {
+                    loadFirstAudioFile(fromLibraryFileName1)
+                    loadSecondAudioFile(fromLibraryFileName2)
+                }
+                else if self.firstAudioFile != nil && self.secondAudioFileData == nil  {
+                    let alert = UIAlertController(title: "Editor Full", message: "You already have a file in the editor. Would you like to replace it?", preferredStyle: .Alert)
+                    let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
+                    alert.addAction(no)
+                    let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
+                        self.loadFirstAudioFile(self.fromLibraryFileName1)
+                        self.loadSecondAudioFile(self.fromLibraryFileName2)
+                    }
+                    alert.addAction(yes)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                else {
+                    let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace them?", preferredStyle: .Alert)
+                    let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
+                    alert.addAction(no)
+                    let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
+                        self.loadFirstAudioFile(self.fromLibraryFileName1)
+                        self.loadSecondAudioFile(self.fromLibraryFileName2)
+                    }
+                    alert.addAction(yes)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             }
-            else if self.secondAudioFileData == nil  {
-                loadFilesFromLibrary(fromLibraryFileName1, fileName2: "")
+            else {
+                if self.firstAudioFileData==nil {
+                    loadFirstAudioFile(fromLibraryFileName1)
+                }
+                else if self.secondAudioFileData==nil {
+                    loadSecondAudioFile(fromLibraryFileName1)
+                }
+                else {
+                    let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace one?", preferredStyle: .Alert)
+                    let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
+                    alert.addAction(no)
+                    let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
+                        self.loadSecondAudioFile(self.fromLibraryFileName1)
+                    }
+                    alert.addAction(yes)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+        }
+        else if fromRecorder {
+            if self.firstAudioFileData==nil {
+                loadFirstAudioFile(fromRecorderFileName)
+            }
+            else if self.secondAudioFileData==nil {
+                loadSecondAudioFile(fromRecorderFileName)
             }
             else {
                 let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace one?", preferredStyle: .Alert)
                 let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
                 alert.addAction(no)
                 let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
-                    self.loadFilesFromLibrary(self.fromLibraryFileName1, fileName2: self.fromLibraryFileName2)
+                    self.loadSecondAudioFile(self.fromRecorderFileName)
                 }
                 alert.addAction(yes)
                 self.presentViewController(alert, animated: true, completion: nil)
             }
         }
-        */
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if soundFileURL != nil {
+        /*if soundFileURL != nil {
             
             print(fromRecorderFileName)
             let soundFile = PFFile(name: fromRecorderFileName, data: NSData(contentsOfURL: soundFileURL!)!)
@@ -342,7 +390,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             
             
             
-            /*if self.firstAudioFileData==nil {
+            if self.firstAudioFileData==nil {
             loadFirstAudioFile(fromLibraryFileName1, fileName2: "")
             }
             else if self.secondAudioFileData==nil {
@@ -357,13 +405,13 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             }
             alert.addAction(yes)
             self.presentViewController(alert, animated: true, completion: nil)
-            }*/
-        }
-        
+            }
+        }*/
+    
         // Do any additional setup after loading the view.
     }
     
-    /*func append(audio1: PFFile, audio2: PFFile) {
+    func append(audio1: PFFile, audio2: PFFile) {
         let file1 = audio1
         let string1 = file1.url
         let file2 = audio2
@@ -434,7 +482,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func overlay(audio1: NSData, audio2:  NSData) {
-        let composition = AVMutableComposition()
+        /*let composition = AVMutableComposition()
         var track1:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio,
             preferredTrackID: CMPersistentTrackID())
         var track2:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: CMPersistentTrackID())
@@ -485,10 +533,9 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
                 //Add new file to library, unfinished
             }
             
-        })
+        })*/
 
     }
-    */
 
     
     override func didReceiveMemoryWarning() {
@@ -508,10 +555,14 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             let svc = segue.destinationViewController as! MusicLibraryViewController;
             svc.fromEditor = true
         }
-        
         if (segue.identifier == "editorToRecorderSegue") {
+            let svc = segue.destinationViewController as! AudioRecorderViewController;
+        }
+        if (segue.identifier == "editorToSenderSegue"){
+            let svc = segue.destinationViewController as! sendToFriendsViewController;
             
         }
+
     }
     
 
