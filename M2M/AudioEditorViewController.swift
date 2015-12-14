@@ -71,7 +71,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) {(action) in}
         alert.addAction(cancel)
         let append = UIAlertAction(title: "Append", style: .Default) {(action) in
-            self.append(self.firstAudioFileData, audio2: self.secondAudioFileData)
+            self.append(self.firstAudioFile, audio2: self.secondAudioFile)
             print("Appended ",self.Id.text, " to ",self.Id2.text)
         }
         alert.addAction(append)
@@ -299,8 +299,8 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         // Do any additional setup after loading the view.
     }
     
-    func append(audio1: NSData, audio2: NSData) {
-        /*let file1 = audio1
+    func append(audio1: PFFile, audio2: PFFile) {
+        let file1 = audio1
         let string1 = file1.url
         let file2 = audio2
         let string2 = file2.url
@@ -317,7 +317,6 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         let url1 = NSURL(fileURLWithPath: string1!)
         let url2 = NSURL(fileURLWithPath: string2!)
         
-        
         let avAsset1 = AVURLAsset(URL: url1, options: nil)
         let avAsset2 = AVURLAsset(URL: url2, options: nil)
         
@@ -328,7 +327,6 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         let assetTrack1:AVAssetTrack = tracks1[0]
         let assetTrack2:AVAssetTrack = tracks2[0]
         
-        
         let duration1: CMTime = assetTrack1.timeRange.duration
         let duration2: CMTime = assetTrack2.timeRange.duration
         
@@ -336,10 +334,11 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         let timeRange2 = CMTimeRangeMake(duration1, duration2)
         
         do {
-            try track1.insertTimeRange(timeRange1, ofTrack: assetTrack1, atTime: kCMTimeZero)
-            try track2.insertTimeRange(timeRange2, ofTrack: assetTrack2, atTime: duration1)
-        }
-        catch _ {
+                try track1.insertTimeRange(timeRange1, ofTrack: assetTrack1, atTime: kCMTimeZero)
+                try track2.insertTimeRange(timeRange2, ofTrack: assetTrack2, atTime: duration1)
+            }
+        catch {
+            print(error)
         }
         
         let assetExport = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A)
@@ -358,14 +357,22 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             format.dateFormat="yyyy-MM-dd-HH-mm-ss"
             self.Id3.text = "Append-\(format.stringFromDate(NSDate())).m4a"
             self.editProductFileData = fileDestinationUrl.dataRepresentation
-        })*/
+            self.Id3.hidden = false
+            self.Play3.hidden = false
+            self.Play3.enabled = true
+            self.Discard3.hidden = false
+            self.Discard3.enabled = true
+            self.Edit.hidden = true
+            self.Edit.enabled = false
+            self.fieldbar3.hidden = false
+        })
         
-        let final = NSMutableData()
+        /*let final = NSMutableData()
         final.appendData(audio1)
         final.appendData(audio2)
         let format = NSDateFormatter()
         format.dateFormat = "yyyy-MM-dd-HH-mm-ss"
-        let audioName = "Overlay-\(format.stringFromDate(NSDate())).m4a"
+        let audioName = "Append-\(format.stringFromDate(NSDate())).m4a"
         Id3.text = audioName
         audioFileToSendName = audioName
         editProductFileData = final
@@ -376,9 +383,9 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         Discard3.enabled = true
         Edit.hidden = true
         Edit.enabled = false
-        fieldbar3.hidden = false
+        fieldbar3.hidden = false*/
         
-        displayPopup(audioName, recoringData: final)
+        displayPopup(self.Id3.text!, recoringData: fileDestinationUrl.dataRepresentation)
     }
     
     func overlay(audio1: NSData, audio2:  NSData) {
