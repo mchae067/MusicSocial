@@ -202,12 +202,12 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
   
     override func viewWillAppear(animated: Bool) {
-        if !(self.tempFilename1 ?? "").isEmpty {
+        /*if !(self.tempFilename1 ?? "").isEmpty {
             loadFirstAudioFile(tempFilename1)
         }
         if !(self.tempFilename2 ?? "").isEmpty {
             loadSecondAudioFile(tempFilename2)
-        }
+        }*/
         
         if fromLibrary {
             print("Received from Library: ",fromLibraryFileName1)
@@ -294,94 +294,6 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /*if !(self.tempFilename1 ?? "").isEmpty {
-            loadFirstAudioFile(tempFilename1)
-        }
-        if !(self.tempFilename2 ?? "").isEmpty {
-            loadSecondAudioFile(tempFilename2)
-        }
-        
-        if fromLibrary {
-            print("Received from Library: ",fromLibraryFileName1)
-            print("Received from Library: ",fromLibraryFileName2)
-            if !(fromLibraryFileName2 ?? "").isEmpty {
-                if self.firstAudioFileData == nil && self.secondAudioFileData == nil {
-                    loadFirstAudioFile(fromLibraryFileName1)
-                    loadSecondAudioFile(fromLibraryFileName2)
-                }
-                else if self.firstAudioFile != nil && self.secondAudioFileData == nil  {
-                    let alert = UIAlertController(title: "Editor Full", message: "You already have a file in the editor. Would you like to replace it?", preferredStyle: .Alert)
-                    let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
-                    alert.addAction(no)
-                    let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
-                        self.loadFirstAudioFile(self.fromLibraryFileName1)
-                        self.loadSecondAudioFile(self.fromLibraryFileName2)
-                    }
-                    alert.addAction(yes)
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-                else if self.firstAudioFile == nil && self.secondAudioFileData != nil  {
-                    let alert = UIAlertController(title: "Editor Full", message: "You already have a file in the editor. Would you like to replace it?", preferredStyle: .Alert)
-                    let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
-                    alert.addAction(no)
-                    let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
-                        self.loadFirstAudioFile(self.fromLibraryFileName1)
-                        self.loadSecondAudioFile(self.fromLibraryFileName2)
-                    }
-                    alert.addAction(yes)
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-                else {
-                    let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace them?", preferredStyle: .Alert)
-                    let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
-                    alert.addAction(no)
-                    let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
-                        self.loadFirstAudioFile(self.fromLibraryFileName1)
-                        self.loadSecondAudioFile(self.fromLibraryFileName2)
-                    }
-                    alert.addAction(yes)
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-            }
-            else {
-                if self.firstAudioFileData==nil {
-                    loadFirstAudioFile(fromLibraryFileName1)
-                }
-                else if self.secondAudioFileData==nil {
-                    loadSecondAudioFile(fromLibraryFileName1)
-                }
-                else {
-                    let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace one?", preferredStyle: .Alert)
-                    let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
-                    alert.addAction(no)
-                    let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
-                        self.loadSecondAudioFile(self.fromLibraryFileName1)
-                    }
-                    alert.addAction(yes)
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-            }
-        }
-        else if fromRecorder {
-            print("Received from Recorder: ",fromRecorderFileName)
-            if self.firstAudioFileData==nil {
-                loadFirstAudioFile(fromRecorderFileName)
-            }
-            else if self.secondAudioFileData==nil {
-                loadSecondAudioFile(fromRecorderFileName)
-            }
-            else {
-                let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace one?", preferredStyle: .Alert)
-                let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
-                alert.addAction(no)
-                let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
-                    self.loadSecondAudioFile(self.fromRecorderFileName)
-                }
-                alert.addAction(yes)
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-        }*/
         // Do any additional setup after loading the view.
     }
     
