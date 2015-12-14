@@ -284,9 +284,12 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         if(segmentedControl.selectedSegmentIndex == 0){
             self.data = self.data0
             currentCategory = 0
+            player?.stop()
         } else {
             self.data = data1
             currentCategory = 1
+            player?.stop()
+
         }
         tableView.reloadData()
     }
@@ -323,6 +326,9 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        player?.stop()
+    }
     /*
     // MARK: - Navigation
 

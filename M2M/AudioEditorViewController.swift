@@ -10,6 +10,7 @@ import AudioToolbox
 import AVFoundation
 import UIKit
 import Parse
+
 class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
     var player : AVAudioPlayer!
@@ -17,6 +18,8 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     var firstAudioFileData: NSData!
     var secondAudioFileData: NSData!
     var editProductFileData: NSData!
+
+    var activitiyIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
     var firstAudioFile: PFFile!
     var secondAudioFile : PFFile!
@@ -28,6 +31,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     var fromLibraryFileName2 = ""
     var fromRecorderFileName = ""
     var editProductFileName = ""
+    var audioFileToSendName : String!
     
     var tempFilename1 = ""
     var tempFilename2 = ""
@@ -357,13 +361,18 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             self.Id3.text = "Append-\(format.stringFromDate(NSDate())).m4a"
             self.editProductFileData = fileDestinationUrl.dataRepresentation
         })*/
+        
         let final = NSMutableData()
         final.appendData(audio1)
         final.appendData(audio2)
         let format = NSDateFormatter()
-        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-        Id3.text = "Append-\(format.stringFromDate(NSDate())).m4a"
+        format.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        let audioName = "Overlay-\(format.stringFromDate(NSDate())).m4a"
+        Id3.text = audioName
+        audioFileToSendName = audioName
         editProductFileData = final
+        
+        displayPopup(audioName, recoringData: final)
     }
     
     func overlay(audio1: NSData, audio2:  NSData) {
@@ -423,13 +432,99 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         final.appendData(audio1)
         final.appendData(audio2)
         let format = NSDateFormatter()
-        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-        Id3.text = "Overlay-\(format.stringFromDate(NSDate())).m4a"
+        format.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        let audioName = "Overlay-\(format.stringFromDate(NSDate())).m4a"
+        Id3.text = audioName
+        audioFileToSendName = audioName
         editProductFileData = final
 
-
+        displayPopup(audioName, recoringData: final)
+        
+    }
+    
+    func displayPopup(var recordingName: String, recoringData: NSData) {
+        //************** alert to name the recording *******************
+        let alert = UIAlertController(title: "Rename",
+            message: "Name Recording",
+            preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: "Save to your recordings", style: .Default, handler: {[unowned alert] action in
+            //print("yes was tapped")
+            if let textFields = alert.textFields{
+                let tfa = textFields as [UITextField]
+                let text = tfa[0].text
+                recordingName = text!
+                self.audioFileToSendName = text!
+            }
+            
+            //start activity indicator
+            self.activitiyIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+            self.activitiyIndicator.center = self.view.center
+            self.activitiyIndicator.hidesWhenStopped = true
+            self.activitiyIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            self.view.addSubview(self.activitiyIndicator)
+            self.activitiyIndicator.startAnimating()
+            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+            
+            // attempt to save to Parse
+            self.saveToParse(recordingName, recordingData: recoringData)
+            }))
+        
+        alert.addAction(UIAlertAction(title: "Don't save", style: .Default, handler: {action in
+            print("no was tapped")
+            
+            if let textFields = alert.textFields{
+                let tfa = textFields as [UITextField]
+                let text = tfa[0].text
+                recordingName = text!
+            }
+        }))
+        
+        alert.addTextFieldWithConfigurationHandler({textfield in
+            textfield.placeholder = "Enter a filename"
+            textfield.text = recordingName
+        })
+        
+        self.presentViewController(alert, animated:true, completion:nil)
+        //******************************************************
     }
 
+    func saveToParse(recordingName: String, recordingData: NSData) {
+        
+        let soundFile = PFFile(name: recordingName, data: recordingData)
+        let testClass = PFObject(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
+        testClass["audioName"] = recordingName
+        testClass["audioFile"] = soundFile
+        testClass["author"] = (PFUser.currentUser()?.username)!
+        testClass.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if error != nil {
+                print(error)
+                print("didnt save!!")
+                
+                //ends activity indicator
+                self.activitiyIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                
+                let alert = UIAlertController(title: "Failed",
+                    message: "Unable to save audio file",
+                    preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: {action in
+                }))
+                
+                self.presentViewController(alert, animated:true, completion:nil)
+                
+            } else {
+                //saved to Parse!
+                print("saved to Parse")
+                //self.latestRecordingName = recordingName
+                //ends activity indicator
+                self.activitiyIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            }
+        })
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -485,7 +580,9 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
         if (segue.identifier == "editorToSenderSegue"){
             let svc = segue.destinationViewController as! sendToFriendsViewController;
-            
+            if let audioName = audioFileToSendName {
+                svc.recordingName = audioName
+            }
         }
 
     }
