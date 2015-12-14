@@ -40,6 +40,8 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     var point : Int = 0
     
     var fromEditor = false
+    var tempFilename1 = ""
+    var tempFilename2 = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -172,7 +174,7 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         play(indexPath.row)
     }
     
-    //slide to delete
+    //Slide to delete. Need permission from Parse to implement.
     /*func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             print((PFUser.currentUser()?.username)!)
@@ -243,14 +245,28 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         if (segue.identifier == "libraryToEditorSegue"){
             let svc = segue.destinationViewController as! AudioEditorViewController;
             svc.fromLibrary = true
+            svc.tempFilename1 = tempFilename1
+            svc.tempFilename2 = tempFilename2
         
             if currentCategory == 0 {
-                svc.fromLibraryFileName1 = data0[selectedFileIndexRow1]
-                svc.fromLibraryFileName2 = data0[selectedFileIndexRow2]
-            } else {
-                svc.fromLibraryFileName1 = data1[selectedFileIndexRow1]
-                svc.fromLibraryFileName2 = data1[selectedFileIndexRow2]
-
+                if currentCount == 2 {
+                    svc.fromLibraryFileName1 = data0[selectedFileIndexRow1]
+                    svc.fromLibraryFileName2 = data0[selectedFileIndexRow2]
+                }
+                else if currentCount == 1 {
+                    svc.fromLibraryFileName1 = data0[selectedFileIndexRow1]
+                    svc.fromLibraryFileName2 = ""
+                }
+            }
+            else {
+                if currentCount == 2 {
+                    svc.fromLibraryFileName1 = data1[selectedFileIndexRow1]
+                    svc.fromLibraryFileName2 = data1[selectedFileIndexRow2]
+                }
+                else if currentCount == 1 {
+                    svc.fromLibraryFileName1 = data1[selectedFileIndexRow1]
+                    svc.fromLibraryFileName2 = ""
+                }
             }
         }
     }

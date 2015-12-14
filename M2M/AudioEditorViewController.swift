@@ -29,6 +29,9 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     var fromRecorderFileName = ""
     var editProductFileName = ""
     
+    var tempFilename1 = ""
+    var tempFilename2 = ""
+    
     var soundFileURL: NSURL!
     
     @IBOutlet var Play: UIButton!
@@ -67,12 +70,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
         alert.addAction(append)
         let overlay = UIAlertAction(title: "Overlay", style: .Default) {(action) in
-            //open table menu...
-            //item1=file at index
-            //open table menu again without item1
-            //item2=file at index
-            //call overlay()
-            //add new item to table
+            self.overlay(self.firstAudioFileData, audio2: self.secondAudioFileData)
         }
         alert.addAction(overlay)
         self.presentViewController(alert, animated: true, completion: nil)
@@ -160,6 +158,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
                     if error == nil {
                         self.firstAudioFileData = data
                         self.Id.text = fileName
+                        print("Loaded ",fileName)
                         self.fromLibrary = false
                         self.fromRecorder = false
                     }
@@ -184,6 +183,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
                     if error == nil {
                         self.secondAudioFileData = data
                         self.Id2.text = fileName
+                        print("Loaded ",fileName)
                         self.fromLibrary = false
                         self.fromRecorder = false
                     }
@@ -206,10 +206,16 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(fromLibraryFileName1)     // name for first file
-        print(fromLibraryFileName2)     // name for second file
+        if !(self.tempFilename1 ?? "").isEmpty {
+            loadFirstAudioFile(tempFilename1)
+        }
+        if !(self.tempFilename2 ?? "").isEmpty {
+            loadSecondAudioFile(tempFilename2)
+        }
         
         if fromLibrary {
+            print("Received from Library: ",fromLibraryFileName1)
+            print("Received from Library: ",fromLibraryFileName2)
             if !(fromLibraryFileName2 ?? "").isEmpty {
                 if self.firstAudioFileData == nil && self.secondAudioFileData == nil {
                     loadFirstAudioFile(fromLibraryFileName1)
@@ -269,6 +275,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             }
         }
         else if fromRecorder {
+            print("Received from Recorder: ",fromRecorderFileName)
             if self.firstAudioFileData==nil {
                 loadFirstAudioFile(fromRecorderFileName)
             }
@@ -349,7 +356,6 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             self.Id3.text = "Append-\(format.stringFromDate(NSDate())).m4a"
             self.editProductFileData = fileDestinationUrl.dataRepresentation
         })*/
-        
         let final = NSMutableData()
         final.appendData(audio1)
         final.appendData(audio2)
@@ -412,6 +418,14 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             }
             
         })*/
+        let final = NSMutableData()
+        final.appendData(audio1)
+        final.appendData(audio2)
+        let format = NSDateFormatter()
+        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+        Id3.text = "Overlay-\(format.stringFromDate(NSDate())).m4a"
+        editProductFileData = final
+
 
     }
 
@@ -432,9 +446,29 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         if (segue.identifier == "editorToLibrarySegue") {
             let svc = segue.destinationViewController as! MusicLibraryViewController;
             svc.fromEditor = true
+            if firstAudioFile != nil {
+                self.tempFilename1 = self.firstAudioFile.name
+                print("Global ",tempFilename1)
+            }
+            if secondAudioFile != nil {
+                self.tempFilename2 = self.secondAudioFile.name
+                print("Global ",tempFilename2)
+            }
+            svc.tempFilename1 = tempFilename1
+            svc.tempFilename2 = tempFilename2
         }
         if (segue.identifier == "editorToRecorderSegue") {
             let svc = segue.destinationViewController as! AudioRecorderViewController;
+            if firstAudioFile != nil {
+                self.tempFilename1 = self.firstAudioFile.name
+                print("Global ",tempFilename1)
+            }
+            if secondAudioFile != nil {
+                self.tempFilename2 = self.secondAudioFile.name
+                print("Global ",tempFilename2)
+            }
+            svc.tempFilename1 = tempFilename1
+            svc.tempFilename2 = tempFilename2
         }
         if (segue.identifier == "editorToSenderSegue"){
             let svc = segue.destinationViewController as! sendToFriendsViewController;

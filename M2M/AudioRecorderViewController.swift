@@ -30,6 +30,9 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
     //Reference to pass to the Editor
     var latestRecordingName = ""
     
+    var tempFilename1 = ""
+    var tempFilename2 = ""
+    
     @IBOutlet var Record: UIButton!
     
     @IBOutlet var Play: UIButton!
@@ -302,6 +305,8 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
                 //svc.url = soundFileURL   //clearly audioEditorViewController does have url, but it says it doesnt...
                 svc.fromRecorder = true
                 svc.fromRecorderFileName = self.latestRecordingName
+                svc.tempFilename1 = tempFilename1
+                svc.tempFilename2 = tempFilename2
             }
         }
     }
