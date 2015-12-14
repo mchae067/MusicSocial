@@ -47,6 +47,7 @@
 		40ADD5EA1BFD88460031E177 /* sendToFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADD5E91BFD88460031E177 /* sendToFriendsViewController.swift */; };
 		437C2F321BF36BFB0018F362 /* AudioEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */; };
 		B633784A1C16BD2A00A4B985 /* radial in Resources */ = {isa = PBXBuildFile; fileRef = B63378491C16BD2A00A4B985 /* radial */; };
+		B6B5C4E41C1EA2C000D3DB51 /* launchx2.png in Resources */ = {isa = PBXBuildFile; fileRef = B6B5C4E31C1EA2C000D3DB51 /* launchx2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		40ADD5E91BFD88460031E177 /* sendToFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sendToFriendsViewController.swift; sourceTree = "<group>"; };
 		437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEditorViewController.swift; sourceTree = "<group>"; };
 		B63378491C16BD2A00A4B985 /* radial */ = {isa = PBXFileReference; lastKnownFileType = folder; path = radial; sourceTree = "<group>"; };
+		B6B5C4E31C1EA2C000D3DB51 /* launchx2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchx2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 				405A26E31BF28B4E0018818C /* ViewFriendProfileViewController.swift */,
 				405A26E51BF28B8B0018818C /* SearchFriendViewController.swift */,
 				407859B01BF2599B003F122B /* Assets.xcassets */,
+				B6B5C4E31C1EA2C000D3DB51 /* launchx2.png */,
 				405A26EB1BF2947D0018818C /* SampleImage.png */,
 				4026EF3D1BF4014100EE18AB /* sampleRecorder.png */,
 				406331C31BFBB34200FF5B3D /* RecorderIcon.png */,
@@ -351,6 +354,7 @@
 				B633784A1C16BD2A00A4B985 /* radial in Resources */,
 				407859AC1BF2599B003F122B /* Main.storyboard in Resources */,
 				4026EF3E1BF4014100EE18AB /* sampleRecorder.png in Resources */,
+				B6B5C4E41C1EA2C000D3DB51 /* launchx2.png in Resources */,
 				405A26EC1BF2947D0018818C /* SampleImage.png in Resources */,
 				406331C41BFBB34200FF5B3D /* RecorderIcon.png in Resources */,
 			);
