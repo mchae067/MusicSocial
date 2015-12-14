@@ -60,6 +60,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
    
     @IBOutlet var LibraryBtn: UIButton!
     
+    @IBOutlet var fieldbar3: UIImageView!
     
     
     
@@ -128,6 +129,15 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             print(error.localizedDescription)
         }
     }
+    
+//    Id3.hidden = false
+//    Play3.hidden = false
+//    Play3.enabled = true
+//    Discard3.hidden = false
+//    Discard3.enable = true
+//    Edit.hidden = true
+//    Edit.enabled = false
+//    fieldbar3.hidden = false
     
     //Allow the user to discard the current file and pick another one from the library
     @IBAction func Discard(sender: UIButton) {

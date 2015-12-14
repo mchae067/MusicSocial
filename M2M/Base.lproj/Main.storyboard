@@ -219,13 +219,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGX-pv-gNC">
-                                <rect key="frame" x="84" y="521" width="20" height="21"/>
-                                <state key="normal" image="playbtn"/>
-                                <connections>
-                                    <action selector="Play2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="unw-9e-Uak"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idM-K4-jtK">
                                 <rect key="frame" x="171" y="421" width="30" height="31"/>
                                 <state key="normal" image="plusbtn"/>
@@ -233,6 +226,12 @@
                                     <segue destination="aIm-K5-oHX" kind="show" identifier="editorToLibrarySegue" id="x2c-hS-vsK"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUA-6W-R1Y">
+                                <rect key="frame" x="110" y="323" width="150" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifT-n9-f8e">
                                 <rect key="frame" x="84" y="126" width="20" height="21"/>
                                 <state key="normal" image="playbtn"/>
@@ -240,11 +239,11 @@
                                     <action selector="Play:" destination="YU8-xd-QMT" eventType="touchUpInside" id="KWQ-wx-dHP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE6-Ex-sxr">
-                                <rect key="frame" x="268" y="521" width="21" height="21"/>
-                                <state key="normal" image="discardbtn"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGX-pv-gNC">
+                                <rect key="frame" x="84" y="521" width="20" height="21"/>
+                                <state key="normal" image="playbtn"/>
                                 <connections>
-                                    <action selector="Discard2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="oKs-2c-L98"/>
+                                    <action selector="Play2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="unw-9e-Uak"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2PY-fg-Yq6">
@@ -254,13 +253,6 @@
                                     <action selector="Play3:" destination="YU8-xd-QMT" eventType="touchUpInside" id="tto-yc-MyK"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEW-3d-Q0A">
-                                <rect key="frame" x="268" y="323" width="21" height="21"/>
-                                <state key="normal" image="discardbtn"/>
-                                <connections>
-                                    <action selector="Discard3:" destination="YU8-xd-QMT" eventType="touchUpInside" id="d12-su-G2r"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Own-HE-ihr">
                                 <rect key="frame" x="268" y="126" width="21" height="21"/>
                                 <state key="normal" image="discardbtn"/>
@@ -268,12 +260,20 @@
                                     <action selector="Discard:" destination="YU8-xd-QMT" eventType="touchUpInside" id="pJi-Sv-Kem"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUA-6W-R1Y">
-                                <rect key="frame" x="110" y="323" width="150" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEW-3d-Q0A">
+                                <rect key="frame" x="268" y="323" width="21" height="21"/>
+                                <state key="normal" image="discardbtn"/>
+                                <connections>
+                                    <action selector="Discard3:" destination="YU8-xd-QMT" eventType="touchUpInside" id="d12-su-G2r"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE6-Ex-sxr">
+                                <rect key="frame" x="268" y="521" width="21" height="21"/>
+                                <state key="normal" image="discardbtn"/>
+                                <connections>
+                                    <action selector="Discard2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="oKs-2c-L98"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -297,6 +297,7 @@
                         <outlet property="Play" destination="ifT-n9-f8e" id="jFj-hu-L4c"/>
                         <outlet property="Play2" destination="FGX-pv-gNC" id="OU3-rU-nUZ"/>
                         <outlet property="Play3" destination="2PY-fg-Yq6" id="TFm-KP-e66"/>
+                        <outlet property="fieldbar3" destination="bxg-9n-z2L" id="chw-cl-ANq"/>
                         <segue destination="g9b-Kb-WYR" kind="show" identifier="editorToRecorderSegue" id="vW1-93-87K"/>
                     </connections>
                 </viewController>
