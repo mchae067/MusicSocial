@@ -71,7 +71,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) {(action) in}
         alert.addAction(cancel)
         let append = UIAlertAction(title: "Append", style: .Default) {(action) in
-            self.append(self.firstAudioFile, audio2: self.secondAudioFile)
+            self.append(self.firstAudioFileData, audio2: self.secondAudioFileData)
             print("Appended ",self.Id.text, " to ",self.Id2.text)
         }
         alert.addAction(append)
@@ -299,8 +299,8 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         // Do any additional setup after loading the view.
     }
     
-    func append(audio1: PFFile, audio2: PFFile) {
-        let file1 = audio1
+    func append(audio1: NSData, audio2: NSData) {
+        /*let file1 = audio1
         let string1 = file1.url
         let file2 = audio2
         let string2 = file2.url
@@ -365,17 +365,18 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             self.Edit.hidden = true
             self.Edit.enabled = false
             self.fieldbar3.hidden = false
-        })
+        })*/
         
-        /*let final = NSMutableData()
-        final.appendData(audio1)
-        final.appendData(audio2)
+        let final = NSMutableData.init(data: audio1)
+        let final2 = NSMutableData.init(data: audio2)
+        final.appendData(final2)
+        let final3 = NSData(data: final)
         let format = NSDateFormatter()
         format.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         let audioName = "Append-\(format.stringFromDate(NSDate())).m4a"
         Id3.text = audioName
         audioFileToSendName = audioName
-        editProductFileData = final
+        editProductFileData = final3
         Id3.hidden = false
         Play3.hidden = false
         Play3.enabled = true
@@ -383,9 +384,9 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         Discard3.enabled = true
         Edit.hidden = true
         Edit.enabled = false
-        fieldbar3.hidden = false*/
+        fieldbar3.hidden = false
         
-        displayPopup(self.Id3.text!, recoringData: fileDestinationUrl.dataRepresentation)
+        displayPopup(self.Id3.text!, recoringData: final3)
     }
     
     func overlay(audio1: NSData, audio2:  NSData) {
@@ -468,7 +469,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
             message: "Name Recording",
             preferredStyle: .Alert)
         
-        alert.addAction(UIAlertAction(title: "Save to your recordings", style: .Default, handler: {[unowned alert] action in
+        alert.addAction(UIAlertAction(title: "Save to your library", style: .Default, handler: {[unowned alert] action in
             //print("yes was tapped")
             if let textFields = alert.textFields{
                 let tfa = textFields as [UITextField]
