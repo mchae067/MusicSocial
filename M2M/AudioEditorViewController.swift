@@ -80,7 +80,15 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
              print("Overlaid ",self.Id.text, " over ",self.Id2.text)
         }
         alert.addAction(overlay)
-        self.presentViewController(alert, animated: true, completion: nil)
+        if firstAudioFileData == nil || secondAudioFileData == nil {
+            let errorMsg = UIAlertController(title: "Error", message: "You need to choose two files before editing", preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "OK", style: .Cancel) {(action) in}
+            errorMsg.addAction(ok)
+            self.presentViewController(errorMsg, animated: true, completion: nil)
+        }
+        else {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     //need error checking for nil
@@ -130,15 +138,6 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-//    Id3.hidden = false
-//    Play3.hidden = false
-//    Play3.enabled = true
-//    Discard3.hidden = false
-//    Discard3.enable = true
-//    Edit.hidden = true
-//    Edit.enabled = false
-//    fieldbar3.hidden = false
-    
     //Allow the user to discard the current file and pick another one from the library
     @IBAction func Discard(sender: UIButton) {
         firstAudioFileData = nil
@@ -161,6 +160,14 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         fromLibrary = false
         fromRecorder = false
         Id3.text = "No File"
+        Id3.hidden = true
+        Play3.hidden = true
+        Play3.enabled = false
+        Discard3.hidden = true
+        Discard3.enabled = false
+        Edit.hidden = false
+        Edit.enabled = true
+        fieldbar3.hidden = true
     }
     
     
@@ -381,6 +388,14 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         Id3.text = audioName
         audioFileToSendName = audioName
         editProductFileData = final
+        Id3.hidden = false
+        Play3.hidden = false
+        Play3.enabled = true
+        Discard3.hidden = false
+        Discard3.enabled = true
+        Edit.hidden = true
+        Edit.enabled = false
+        fieldbar3.hidden = false
         
         displayPopup(audioName, recoringData: final)
     }
@@ -447,7 +462,14 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         Id3.text = audioName
         audioFileToSendName = audioName
         editProductFileData = final
-
+        Id3.hidden = false
+        Play3.hidden = false
+        Play3.enabled = true
+        Discard3.hidden = false
+        Discard3.enabled = true
+        Edit.hidden = true
+        Edit.enabled = false
+        fieldbar3.hidden = false
         displayPopup(audioName, recoringData: final)
         
     }
