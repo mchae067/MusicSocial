@@ -247,13 +247,6 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
             svc.fromLibrary = true
             svc.tempFilename1 = tempFilename1
             svc.tempFilename2 = tempFilename2
-            if !(self.tempFilename1 ?? "").isEmpty {
-                svc.loadFirstAudioFile(tempFilename1)
-            }
-            if !(self.tempFilename2 ?? "").isEmpty {
-                svc.loadFirstAudioFile(tempFilename2)
-            }
-        
             if currentCategory == 0 {
                 if currentCount == 2 {
                     svc.fromLibraryFileName1 = data0[selectedFileIndexRow1]
