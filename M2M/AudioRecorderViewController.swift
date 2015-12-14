@@ -307,6 +307,12 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
                 svc.fromRecorderFileName = self.latestRecordingName
                 svc.tempFilename1 = tempFilename1
                 svc.tempFilename2 = tempFilename2
+                if !(self.tempFilename1 ?? "").isEmpty {
+                    svc.loadFirstAudioFile(tempFilename1)
+                }
+                if !(self.tempFilename2 ?? "").isEmpty {
+                    svc.loadFirstAudioFile(tempFilename2)
+                }
             }
         }
     }
