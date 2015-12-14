@@ -166,52 +166,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m66-Ev-GKF">
-                                <rect key="frame" x="251" y="140" width="46" height="30"/>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <action selector="Edit:" destination="YU8-xd-QMT" eventType="touchUpInside" id="THa-CJ-E4a"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1L6-7K-ukU" userLabel="UserProfile1">
-                                <rect key="frame" x="20" y="324" width="130" height="130"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Maskedbg" translatesAutoresizingMaskIntoConstraints="NO" id="MpH-ek-0by" userLabel="Background" customClass="maskedbg">
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63B-83-HOX" userLabel="UserProfile2">
-                                <rect key="frame" x="214" y="324" width="130" height="130"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opq-0D-ASd">
-                                <rect key="frame" x="75" y="474" width="53" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KP-cf-bpp">
-                                <rect key="frame" x="269" y="474" width="53" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGX-pv-gNC">
-                                <rect key="frame" x="222" y="517" width="42" height="30"/>
-                                <state key="normal" title="Play2"/>
-                                <connections>
-                                    <action selector="Play2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="unw-9e-Uak"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idM-K4-jtK">
-                                <rect key="frame" x="67" y="140" width="48" height="30"/>
-                                <state key="normal" title="Library"/>
-                                <connections>
-                                    <segue destination="aIm-K5-oHX" kind="show" identifier="editorToLibrarySegue" id="x2c-hS-vsK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifT-n9-f8e">
-                                <rect key="frame" x="42" y="517" width="30" height="30"/>
-                                <state key="normal" title="Play"/>
-                                <connections>
-                                    <action selector="Play:" destination="YU8-xd-QMT" eventType="touchUpInside" id="KWQ-wx-dHP"/>
-                                </connections>
-                            </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jWv-Z7-FfC">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
@@ -228,40 +185,95 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUA-6W-R1Y">
-                                <rect key="frame" x="58" y="249" width="150" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fieldbar" translatesAutoresizingMaskIntoConstraints="NO" id="iV0-bx-2Hw" userLabel="fieldbar1">
+                                <rect key="frame" x="67" y="112" width="240" height="50"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fieldbar" translatesAutoresizingMaskIntoConstraints="NO" id="bxg-9n-z2L" userLabel="fieldbar3">
+                                <rect key="frame" x="65" y="309" width="240" height="50"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="topline" translatesAutoresizingMaskIntoConstraints="NO" id="Ivs-w7-Zfa">
+                                <rect key="frame" x="177" y="159" width="20" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bottomline" translatesAutoresizingMaskIntoConstraints="NO" id="MFl-Jq-cmY">
+                                <rect key="frame" x="177" y="357" width="20" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fieldbar" translatesAutoresizingMaskIntoConstraints="NO" id="4r8-Hs-F30" userLabel="fieldbar2">
+                                <rect key="frame" x="67" y="507" width="240" height="50"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m66-Ev-GKF">
+                                <rect key="frame" x="162" y="309" width="50" height="50"/>
+                                <state key="normal" image="editbtn"/>
+                                <connections>
+                                    <action selector="Edit:" destination="YU8-xd-QMT" eventType="touchUpInside" id="THa-CJ-E4a"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opq-0D-ASd">
+                                <rect key="frame" x="106" y="125" width="159" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE6-Ex-sxr">
-                                <rect key="frame" x="291" y="517" width="61" height="30"/>
-                                <state key="normal" title="Discard2"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KP-cf-bpp">
+                                <rect key="frame" x="106" y="520" width="159" height="22"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGX-pv-gNC">
+                                <rect key="frame" x="84" y="521" width="20" height="21"/>
+                                <state key="normal" image="playbtn"/>
+                                <connections>
+                                    <action selector="Play2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="unw-9e-Uak"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idM-K4-jtK">
+                                <rect key="frame" x="171" y="421" width="30" height="31"/>
+                                <state key="normal" image="plusbtn"/>
+                                <connections>
+                                    <segue destination="aIm-K5-oHX" kind="show" identifier="editorToLibrarySegue" id="x2c-hS-vsK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifT-n9-f8e">
+                                <rect key="frame" x="84" y="126" width="20" height="21"/>
+                                <state key="normal" image="playbtn"/>
+                                <connections>
+                                    <action selector="Play:" destination="YU8-xd-QMT" eventType="touchUpInside" id="KWQ-wx-dHP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE6-Ex-sxr">
+                                <rect key="frame" x="268" y="521" width="21" height="21"/>
+                                <state key="normal" image="discardbtn"/>
                                 <connections>
                                     <action selector="Discard2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="oKs-2c-L98"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2PY-fg-Yq6">
-                                <rect key="frame" x="46" y="278" width="38" height="30"/>
-                                <state key="normal" title="Play3"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2PY-fg-Yq6">
+                                <rect key="frame" x="84" y="323" width="20" height="21"/>
+                                <state key="normal" image="playbtn"/>
                                 <connections>
                                     <action selector="Play3:" destination="YU8-xd-QMT" eventType="touchUpInside" id="tto-yc-MyK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEW-3d-Q0A">
-                                <rect key="frame" x="116" y="278" width="62" height="30"/>
-                                <state key="normal" title="Discard3"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEW-3d-Q0A">
+                                <rect key="frame" x="268" y="323" width="21" height="21"/>
+                                <state key="normal" image="discardbtn"/>
                                 <connections>
                                     <action selector="Discard3:" destination="YU8-xd-QMT" eventType="touchUpInside" id="d12-su-G2r"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Own-HE-ihr">
-                                <rect key="frame" x="97" y="517" width="53" height="30"/>
-                                <state key="normal" title="Discard"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Own-HE-ihr">
+                                <rect key="frame" x="268" y="126" width="21" height="21"/>
+                                <state key="normal" image="discardbtn"/>
                                 <connections>
                                     <action selector="Discard:" destination="YU8-xd-QMT" eventType="touchUpInside" id="pJi-Sv-Kem"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No File" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUA-6W-R1Y">
+                                <rect key="frame" x="110" y="323" width="150" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -838,10 +850,17 @@
         <image name="Twitter" width="134" height="132"/>
         <image name="VImage" width="375" height="406"/>
         <image name="barimage" width="206" height="51"/>
+        <image name="bottomline" width="19" height="148"/>
+        <image name="discardbtn" width="22" height="22"/>
         <image name="edit" width="37" height="38"/>
+        <image name="editbtn" width="50" height="51"/>
+        <image name="fieldbar" width="260" height="50"/>
         <image name="library" width="30" height="27"/>
         <image name="logout" width="31" height="31"/>
+        <image name="playbtn" width="20" height="20"/>
+        <image name="plusbtn" width="30" height="31"/>
         <image name="tabfriend" width="30" height="30"/>
+        <image name="topline" width="19" height="148"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RUP-rU-oJu"/>
