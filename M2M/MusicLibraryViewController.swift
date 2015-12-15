@@ -66,7 +66,7 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
                 for object in objects!{
                     if object["author"] as! String == (PFUser.currentUser()?.username)! {
                         self.data1.append(String(object["audioName"]))
-                        self.dataAuthor1.append("Author: You)")
+                        self.dataAuthor1.append("Author: You")
                         let file = object["audioFile"] as! PFFile
                         self.audioFiles1.append(file)
                     } else {
