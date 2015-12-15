@@ -14,6 +14,8 @@ class ViewFriendProfileViewController: UIViewController {
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var userPoints: UILabel!
+    @IBOutlet weak var userNumberOfFriends: UILabel!
     
     var passedName = ""
     var isFollowing = false
@@ -31,6 +33,9 @@ class ViewFriendProfileViewController: UIViewController {
         
         query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
+                self.userPoints.text = String(object!["points"])
+                self.userNumberOfFriends.text = String(object!["friendList"].count)
+                
                 //fetch image from parse
                 let image = PFImageView()
                 image.file = object!["profileImage"] as? PFFile

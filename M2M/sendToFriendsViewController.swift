@@ -16,10 +16,10 @@ class sendToFriendsViewController: UIViewController {
     var selectedFriends : [Int] = []
     var selectedFriendsName : [String] = []
     
-    var recordingName = "test_test"
+    var recordingName = ""
     //var url : NSURL!
     
-    var testAudioFile : PFFile!
+    var audioFile : PFFile!
     
     var activitiyIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -45,11 +45,11 @@ class sendToFriendsViewController: UIViewController {
         }
 
         //************************** TEST ****************************************
-        let testQuery = PFQuery(className: "a123_audioFiles")
-        testQuery.whereKey("audioName", equalTo: "test123")
+        let testQuery = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
+        testQuery.whereKey("audioName", equalTo: recordingName)
         testQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
-                self.testAudioFile = object!["audioFile"] as! PFFile
+                self.audioFile = object!["audioFile"] as! PFFile
                 
             } else {
                 print(error)
@@ -135,7 +135,7 @@ class sendToFriendsViewController: UIViewController {
         for friend in selectedFriendsName {
             let newAudio = PFObject(className: "\(friend)_audioFiles") //need to change
             newAudio["audioName"] = recordingName //need to change
-            newAudio["audioFile"] = testAudioFile
+            newAudio["audioFile"] = audioFile
             newAudio["author"] = (PFUser.currentUser()?.username)!
             newAudio.saveInBackgroundWithBlock({ (success, error) -> Void in
                 if error != nil {
