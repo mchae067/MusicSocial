@@ -32,6 +32,9 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     var data : [String] = []
     var data0 : [String] = []
     var data1 : [String] = []
+    var dataAuthor : [String] = []
+    var dataAuthor0 : [String] = []
+    var dataAuthor1 : [String] = []
     
     var audioFiles0 : [PFFile] = []
     var audioFiles1 : [PFFile] = []
@@ -63,10 +66,14 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
                 for object in objects!{
                     if object["author"] as! String == (PFUser.currentUser()?.username)! {
                         self.data1.append(String(object["audioName"]))
+                        self.dataAuthor1.append("Author: You")
                         let file = object["audioFile"] as! PFFile
                         self.audioFiles1.append(file)
                     } else {
                         self.data0.append(String(object["audioName"]))
+                        self.dataAuthor0.append("Author: \(String(object["author"]))")
+                        self.data = self.data0
+                        self.dataAuthor = self.dataAuthor0
                         let file = object["audioFile"] as! PFFile
                         self.audioFiles0.append(file)
                     }
@@ -130,6 +137,8 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         let cell = tableView.dequeueReusableCellWithIdentifier("musicLibraryCell", forIndexPath: indexPath)
         
         cell.textLabel?.text = data[indexPath.row]
+        cell.detailTextLabel?.text = dataAuthor[indexPath.row]
+        
         //let image = UIImage(named: "FriendListIcon")
         //cell.imageView?.image = image
         
@@ -276,10 +285,12 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         
         if(segmentedControl.selectedSegmentIndex == 0){
             self.data = self.data0
+            self.dataAuthor = self.dataAuthor0
             currentCategory = 0
             player?.stop()
         } else {
             self.data = data1
+            self.dataAuthor = self.dataAuthor1
             currentCategory = 1
             player?.stop()
 
